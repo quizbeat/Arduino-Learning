@@ -1,11 +1,12 @@
 // Sketch for turn on/off led by button
 
 int switchPin = 8;
-int ledPin = 13;
+int ledPin = 11;
+
+int ledLevel = 0;
 
 bool lastButtonState = LOW;
 bool currentButtonState = LOW;
-bool ledOn = false;
 
 bool debounce(bool last) {
   bool current = digitalRead(switchPin);
@@ -24,8 +25,11 @@ void setup() {
 void loop() {
   currentButtonState = debounce(lastButtonState);
   if (lastButtonState == HIGH && currentButtonState == LOW) {
-    ledOn = !ledOn;
+    ledLevel = ledLevel + 51;
   }
   lastButtonState = currentButtonState;
-  digitalWrite(ledPin, ledOn);
+  if (ledLevel > 255) {
+    ledLevel = 0;
+  }
+  analogWrite(ledPin, ledLevel);
 }
