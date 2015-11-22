@@ -1,7 +1,7 @@
 // Sketch for turn on/off led by button
 
-int switchPin = 8;
-int ledPin = 11;
+int switchPin = 2;
+int ledPin = 5;
 
 int ledLevel = 0;
 
